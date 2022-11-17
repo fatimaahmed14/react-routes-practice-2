@@ -1,14 +1,26 @@
 import { useEffect, useState } from "react";
+import { useLocation, useNavigate, useParams } from "react-router";
 
 function EditProductPage(props) {
-
   const [productToUpdate, setProductToUpdate] = useState(null);
+
+  const location = useLocation();
+  const { productId } = useParams();
+  // const navigate = useNavigate();
 
   console.log({ productToUpdate });
 
+  useEffect(() => {
+    if (location.state) {
+      const { product } = location.state;
+
+      setProductToUpdate(product);
+    }
+  }, [location]);
+
   //TODO: Write code to set the productToUpdateState
-  //with the product data from the location. 
-  // 
+  //with the product data from the location.
+  //
   //Use useEffect so that when the location changes
   //you get the product data from the location. See
   //ViewProductPage.js to check
